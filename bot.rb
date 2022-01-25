@@ -18,11 +18,24 @@ class Discord
   end
 
   def create_channel(event)
-    for cate in event.server.categories
-      exist = true if cate.name == "score"
-    end
-    event.server.create_channel("score", type = 4) unless exist
+    category = serch_category("score")
+    event.server.create_channel("score", type = 4) unless category.nil?
+    serch_channel("成績")
+    event.server.create_channel("score", type = 0) unless channel.nil?
   end
+
+  def serch_category(name)
+    for cate in event.server.categories
+      category = cate if cate.name == name
+    end
+  end
+
+  def serch_channel(name)
+    for chan in event.server.text_channels
+      channel = chan if chan.name == name
+    end
+  end
+
 
   def setting
     bot.server_create do |event|

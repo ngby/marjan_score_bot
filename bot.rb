@@ -80,6 +80,7 @@ class Discord
   end
 end
 
+
 bot = Discord.new
 bot.start
 
